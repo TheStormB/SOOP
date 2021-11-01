@@ -1,6 +1,6 @@
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
 
 public class Lab2 {
     static void printMaxValue(int [] arr) {
@@ -15,7 +15,7 @@ public class Lab2 {
 //        System.out.println("Maximum value of array is: " + max);
 
         //stream
-        int max = Arrays.stream(arr).max().getAsInt();
+        int max = Arrays.stream(arr).min().getAsInt();
         System.out.println("Max Value is: " + max);
     }
 
@@ -25,40 +25,42 @@ public class Lab2 {
         {
             for (int i = 0; i < arr[j].length; i++)
             {
-                if (arr[j][i] > maxValue)
+                if (arr[j][i] < maxValue)
                 {
                     maxValue = arr[j][i];
                 }
             }
         }
-        System.out.println("Max value of the two dimesion array" + maxValue);
+        System.out.println("Max value of the two dimension array " + maxValue);
     }
 
 
-//    static void printMaxValueStream(int [][] arr){
-//
-//        IntStream stats = Arrays.stream(arr).flatMapToInt(Arrays::stream);
-//
-//        int max = stats.getMax();
-//    }
+    static void printMaxValueStream(int [][] arr){
+        IntStream stream = Arrays.stream(arr).flatMapToInt(x -> Arrays.stream(x));
+        OptionalInt max = stream.max();
+
+        if(max.isPresent()) {
+            System.out.println(max.getAsInt());
+        }
+    }
 
     static int getOccurenceNumber (int[] arr, int value2Check) {
-//        int count = 0;
-//
-//        for(int i = 0; i < arr.length; i++)
-//        {
-//            if(arr[i] == value2Check)
-//            {
-//                count++;
-//            }
-//        }
-//        System.out.println("The given number counted: " + count);
-//        return value2Check;
+        int count = 0;
+
+        for(int i = 0; i < arr.length; i++)
+        {
+            if(arr[i] == value2Check)
+            {
+                count++;
+            }
+        }
+        System.out.println("The given number counted: " + count);
+        return value2Check;
 
         //stream
-        return (int)Arrays.stream(arr)
-                .filter(number -> number == value2Check)
-                .count();
+//        return (int)Arrays.stream(arr)
+//                .filter(number -> number == value2Check)
+//                .count();
     }
 
     static void printMostCommonDigit(int[] arr) {
@@ -84,45 +86,45 @@ public class Lab2 {
     }
 
     static void printMostCommonDigit(int[][] arr) {
-//        int cnt, element = arr[0][0], numberRepeats = 0;
-//        for (int i = 0; i < arr.length; i++)
-//        {
-//            for (int j = 0; j < arr[i].length; j++)
-//            {
-//                cnt = 0;//counter is nullified
-//                for (int j2 = i; j2 < arr.length; j2++)
-//                {
-//                    for (int k = 0; k < arr[j2].length; k++)
-//                    {
-//                        if (arr[i][j] == arr[j2][k])
-//                        {
-//                            cnt++;
-//                        }
-//                    }
-//                    if (cnt > numberRepeats)
-//                    {
-//                        element = arr[i][j];
-//                        numberRepeats = cnt;
-//                    }
-//                }
-//            }
-//        }
-//        System.out.println(element + " : " + numberRepeats);
-
-        Map<Integer, Integer> elementsCounts = new HashMap<>();
+        int count, element = arr[0][0], numberRepeats = 0;
         for (int i = 0; i < arr.length; i++)
         {
             for (int j = 0; j < arr[i].length; j++)
             {
-                Integer count = elementsCounts.get(arr[i][j]);
-                if(count == null)
+                count = 0;
+                for (int j2 = i; j2 < arr.length; j2++)
                 {
-                    count = 0;
+                    for (int k = 0; k < arr[j2].length; k++)
+                    {
+                        if (arr[i][j] == arr[j2][k])
+                        {
+                            count++;
+                        }
+                    }
+                    if (count > numberRepeats)
+                    {
+                        element = arr[i][j];
+                        numberRepeats = count;
+                    }
                 }
-                elementsCounts.put(arr[i][j], count+1);
             }
         }
-        System.out.println(elementsCounts);
+        System.out.println(element + " : " + numberRepeats);
+
+//        Map<Integer, Integer> elementsCounts = new HashMap<>();
+//        for (int i = 0; i < arr.length; i++)
+//        {
+//            for (int j = 0; j < arr[i].length; j++)
+//            {
+//                Integer count = elementsCounts.get(arr[i][j]);
+//                if(count == null)
+//                {
+//                    count = 0;
+//                }
+//                elementsCounts.put(arr[i][j], count+1);
+//            }
+//        }
+//        System.out.println(elementsCounts);
     }
 
     static void printSorted(int [] arr) {
@@ -154,18 +156,19 @@ public class Lab2 {
     }
 
     public static void main(String[] args) {
-        int oneDim[]= {1, 10, 23, 87, 14, 1, 6, 177, 71};
+        int oneDim[]= {10,1, 10, 23, 87, 14, 1, 6, 177, 71,};
         int twoDim[][] = {{1, 2, 12, 2}, {87}, {7, 12,14}, {1,8, 9, 8,}};
 //        printMaxValue(oneDim);
 //        printMaxValue(twoDim);
 //        printMostCommonDigit(oneDim);
 //        printMostCommonDigit(twoDim);
 //        //streams Occurence Number
-//        System.out.println(getOccurenceNumber(oneDim,1));
+        System.out.println(getOccurenceNumber(oneDim,1));
 //        printSorted(oneDim);
 
 //        //bubble sort
-        getOccurenceNumber(oneDim, 1);
+//        getOccurenceNumber(oneDim, 1);
+//        printMaxValueStream(twoDim);
 
 
     }

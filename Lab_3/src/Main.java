@@ -3,22 +3,24 @@ public class Main {
         double result = 1.0;
         double a = 0;
         double b = 1;
-        double denom = 0;
+        double down = 0;
         double num = 0;
         double temp = 0;
-        double halfpi = 1;
+        double pi = 1;
 
         for(int i = 0; i < iterNo; i++)
         {
             temp = b;
             b = temp + 2;
-            denom = temp*b;
+            down = temp*b;
+
             a += 2;
             num = a*a;
-            halfpi *= (num/denom);
-            result = halfpi * 2;
+            pi *= (num/down);
+            
+            result = pi * 2;
         }
-        return (double)result;
+        return result;
     }
 
     public static double calculatePiAccGregory(int iterNo) {
@@ -55,5 +57,7 @@ public class Main {
         System.out.println("Wallies for: "+iterNo+"\t"+value);
         value=calculatePiAccGregory(iterNo);
         System.out.println("Gregory for: "+iterNo+"\t"+value);
+        value=2/(float)4 * 5/(float)10;
+        System.out.println(value);
     }
 }

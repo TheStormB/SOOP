@@ -2,14 +2,12 @@ public class Main {
     //The factorial for a given number;
     public static int R_factorial(int x) {
         if(x <= 2){
-            return x;
+            return 1;
         }else
             return x * R_factorial(x - 1);
     }
 
     public static int factorial(int x) {
-        // ask is it correct or not
-        //is iteration works like that ???
         int result = 1;
         for(int i = 1; i <= x; i++){
             result *= i;
@@ -49,12 +47,13 @@ public class Main {
         return count;
     }
 
-    // check how its working
+
     public static int R_numberDigit(int x, int digit) {
         if(digit == 0){
             return 0;
         }
         int test = digit % 10;
+
         if(test == x){
             return 1 + R_numberDigit(x , digit/ 10);
         }else
@@ -82,8 +81,8 @@ public class Main {
         System.out.println("Factorial: "+ factorial(5));
         System.out.println("(Recursive) Factorial: "+ R_factorial(5));
 
-        System.out.println("Sum: " + sumXY(1,5));
-        System.out.println("(Recursive) Sum: " + R_sumXY(1,5));
+        System.out.println("Sum: " + sumXY(3,3));
+        System.out.println("(Recursive) Sum: " + R_sumXY(3,3));
 
         System.out.println("Number is " + numberDigit(3,6336) + " times in the digit");
         System.out.println("(Recursive) Number is " + R_numberDigit(3,6336) + " times in the digit");
